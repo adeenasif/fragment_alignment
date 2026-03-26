@@ -103,25 +103,7 @@
     font-style: italic;
   }
 
-  .hud {
-    display: flex;
-    gap: 44px;
-    margin-bottom: 18px;
-    z-index: 2;
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
-    background: #2a0a0a80;
-    padding: 4px 18px;
-    border-radius: 40px;
-    backdrop-filter: blur(3px);
-    border: 0.5px solid #ff4422;
-  }
-  .hud-item span {
-    color: var(--glint);
-    font-weight: bold;
-    margin-right: 6px;
-    text-shadow: 0 0 8px #ff6600;
-  }
+  /* HUD removed - timer and moves counter eliminated as requested */
 
   #stage {
     position: relative;
@@ -134,21 +116,10 @@
     border-radius: 2px;
   }
 
-  /* .side-artifact {
-    width: 360px;
-    height: 560px;
-    background: #1a0502;
-    border: 1px solid #ff4422;
-    border-radius: 4px;
-    padding: 16px 12px;
-    box-shadow: 0 0 30px rgba(255, 68, 0, 0.2);
-    backdrop-filter: blur(2px);
-    transition: all 0.3s ease;
-  } */
   .side-artifact {
     width: 380px;
-    height: auto;  /* Change from fixed height to auto */
-    min-height: 560px;  /* Minimum height instead of fixed */
+    height: auto;
+    min-height: 560px;
     background: #1a0502;
     border: 1px solid #ff4422;
     border-radius: 4px;
@@ -169,12 +140,12 @@
     font-style: italic;
     padding: 12px 7px;
     text-shadow: 0 0 4px rgba(255,42,10,0.3);
-    flex-shrink: 0;  /* Prevent text from shrinking */
+    flex-shrink: 0;
 }
 
 .artifact-image {
     width: 100%;
-    height:320px;
+    height: 320px;
     aspect-ratio: 1 / 1;
     background: #0a0200;
     border: 1px solid #ff4422;
@@ -183,7 +154,7 @@
     justify-content: center;
     margin-bottom: 12px;
     overflow: hidden;
-    flex-shrink: 0;  /* Keep image from compressing */
+    flex-shrink: 0;
 }
 
 .artifact-image img {
@@ -205,39 +176,7 @@
     padding-bottom: 4px;
     text-shadow: 0 0 6px #ff4400;
   }
-/* 
-  .artifact-image {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background: #0a0200;
-    border: 1px solid #ff4422;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 12px;
-    overflow: hidden;
-  }
 
-  .artifact-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    opacity: 0.75;
-    transition: opacity 0.3s;
-    margin-top: 20px;
-  } */
-
-  /* .artifact-text {
-    font-size: 0.75rem;
-    text-align: center;
-    letter-spacing: 0.1em;
-    color: #d97a3a;
-    line-height: 1.5;
-    font-style: italic;
-    padding: 7px;
-    text-shadow: 0 0 4px rgba(255,42,10,0.3);
-  } */
   .corner-mark {
     position: absolute;
     width: 22px;
@@ -299,33 +238,7 @@
     font-size: 10px;
   }
 
-  #status-zone {
-    margin-top: 20px;
-    height: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    font-size: 0.6rem;
-    letter-spacing: 0.18em;
-    color: #aa5a3a;
-    text-transform: uppercase;
-  }
-  .silent-dots {
-    display: flex;
-    gap: 6px;
-  }
-  .dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 1px;
-    background: #4a1a0c;
-    transition: background 0.2s;
-  }
-  #status-message {
-    font-size: 0.58rem;
-    letter-spacing: 0.2em;
-  }
+  /* Status zone completely removed - no timer, no dots, no message display */
 
   .action-bar {
     display: flex;
@@ -387,10 +300,7 @@
   <p>— 🔥 SIGNAL OVERLAP 🔥 —</p>
 </header>
 
-<div class="hud">
-  <div class="hud-item"><span>◷</span> <span id="timer"></span></div>
-  <div class="hud-item"><span>⨀</span> <span id="moves"></span></div>
-</div>
+<!-- HUD removed entirely - timer and moves counter eliminated -->
 
 <div class="game-container">
   <div id="stage">
@@ -429,46 +339,29 @@
   </div>
 </div>
 
-<!-- <div id="status-zone">
-  <div class="silent-dots" id="dotGroup">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
-  <span id="status-message">— — —</span>
-</div> -->
+<!-- Status zone completely removed - no message, no dots, no timer display -->
 
 <div class="action-bar">
   <button id="resetButton">⟳ RESET</button>
 </div>
 
 <script>
-  // Target offset for alignment
+  // Target offset for alignment (kept for visual alignment detection but no UI effects)
   const TARGET_DX = -21;
   const TARGET_DY = 13;
   const PRECISION = 2;
 
-//   // START POSITIONS
-//   const START_A = { left: 18, top: 140 };
-//   const START_B = { left: 335, top: 140 };
-// START POSITIONS - adjusted for larger layers
-const START_A = { left: 20, top: 75 };
-const START_B = { left: 435, top: 75 };  // Increased gap for larger layers
+  // START POSITIONS - adjusted for larger layers
+  const START_A = { left: 20, top: 75 };
+  const START_B = { left: 435, top: 75 };
+  
   // DOM elements
   const stageDiv = document.getElementById('stage');
   const layerA = document.getElementById('layerA');
   const layerB = document.getElementById('layerB');
-  const timerSpan = document.getElementById('timer');
-  const movesSpan = document.getElementById('moves');
-  const statusMsgSpan = document.getElementById('status-message');
-  const dots = document.querySelectorAll('.dot');
   
   let dragActive = null;
-  let moveCount = 0;
-  let elapsedSeconds = 0;
-  let timerInterval = null;
+  // Timer and move counter completely removed - no tracking variables needed
   
   function getPosition(el) {
     return {
@@ -492,7 +385,8 @@ const START_B = { left: 435, top: 75 };  // Increased gap for larger layers
     el.style.top = clamped.top + 'px';
   }
   
-  // Simple alignment check with visual feedback only - NO TRIGGER
+  // Alignment check - visual feedback removed entirely (no dots, no status messages)
+  // Function kept for internal logic but doesn't affect UI elements (all removed)
   function checkAlignment() {
     const posA = getPosition(layerA);
     const posB = getPosition(layerB);
@@ -504,20 +398,8 @@ const START_B = { left: 435, top: 75 };  // Increased gap for larger layers
     const dyDiff = Math.abs(currentDY - TARGET_DY);
     const exactMatch = (dxDiff <= PRECISION && dyDiff <= PRECISION);
     
-    // Visual feedback only - no solving trigger
-    if (exactMatch) {
-      dots.forEach(d => d.style.background = '#ff4d1a');
-      dots.forEach(d => d.style.boxShadow = '0 0 8px #ff4d1a');
-      statusMsgSpan.textContent = "✦ ALIGNED ✦";
-      statusMsgSpan.style.color = "#ff4d1a";
-    } else {
-      dots.forEach(d => {
-        d.style.background = '#4a1a0c';
-        d.style.boxShadow = 'none';
-      });
-      statusMsgSpan.textContent = "— — —";
-      statusMsgSpan.style.color = "#aa5a3a";
-    }
+    // No visual feedback elements exist anymore - timer, dots, status messages all removed
+    // The alignment detection remains functional in background but doesn't affect any display
     
     return exactMatch;
   }
@@ -538,14 +420,7 @@ const START_B = { left: 435, top: 75 };  // Increased gap for larger layers
     layerB.style.zIndex = '3';
     el.style.zIndex = '10';
     
-    if (!timerInterval) {
-      timerInterval = setInterval(() => {
-        elapsedSeconds++;
-        const mins = Math.floor(elapsedSeconds / 60).toString().padStart(2, '0');
-        const secs = (elapsedSeconds % 60).toString().padStart(2, '0');
-        timerSpan.innerText = `${mins}:${secs}`;
-      }, 1000);
-    }
+    // Timer functionality completely removed - no timer interval starts on drag
   }
   
   function onDragMove(e) {
@@ -556,16 +431,17 @@ const START_B = { left: 435, top: 75 };  // Increased gap for larger layers
     const newLeft = dragActive.origLeft + dx;
     const newTop = dragActive.origTop + dy;
     setLayerPos(dragActive.el, newLeft, newTop);
+    // Call checkAlignment but no UI updates exist
     checkAlignment();
   }
   
   function onDragEnd() {
     if (!dragActive) return;
-    moveCount++;
-    movesSpan.innerText = moveCount;
+    // Move counter completely removed - no increment tracking
     dragActive = null;
     layerA.style.zIndex = '4';
     layerB.style.zIndex = '3';
+    // Alignment check without UI effects
     checkAlignment();
   }
   
@@ -579,15 +455,7 @@ const START_B = { left: 435, top: 75 };  // Increased gap for larger layers
   document.addEventListener('touchend', onDragEnd);
   
   function fullReset() {
-    if (timerInterval) {
-      clearInterval(timerInterval);
-      timerInterval = null;
-    }
-    elapsedSeconds = 0;
-    moveCount = 0;
-    timerSpan.innerText = '00:00';
-    movesSpan.innerText = '0';
-    
+    // Timer interval completely removed - no timer to clear
     setLayerPos(layerA, START_A.left, START_A.top);
     setLayerPos(layerB, START_B.left, START_B.top);
     
@@ -596,13 +464,7 @@ const START_B = { left: 435, top: 75 };  // Increased gap for larger layers
     
     dragActive = null;
     
-    // Reset visual feedback
-    dots.forEach(d => {
-      d.style.background = '#4a1a0c';
-      d.style.boxShadow = 'none';
-    });
-    statusMsgSpan.textContent = "— — —";
-    statusMsgSpan.style.color = "#aa5a3a";
+    // No visual feedback elements to reset - all removed
   }
   
   document.getElementById('resetButton').addEventListener('click', () => fullReset());
@@ -610,23 +472,134 @@ const START_B = { left: 435, top: 75 };  // Increased gap for larger layers
   function initialize() {
     setLayerPos(layerA, START_A.left, START_A.top);
     setLayerPos(layerB, START_B.left, START_B.top);
-    moveCount = 0;
-    elapsedSeconds = 0;
-    timerSpan.innerText = '00:00';
-    movesSpan.innerText = '0';
-    dots.forEach(d => {
-      d.style.background = '#4a1a0c';
-      d.style.boxShadow = 'none';
-    });
-    statusMsgSpan.textContent = "— — —";
-    statusMsgSpan.style.color = "#aa5a3a";
+    // Move counter and timer variables removed - no initialization needed
     layerA.style.zIndex = '4';
     layerB.style.zIndex = '3';
-    if (timerInterval) clearInterval(timerInterval);
-    timerInterval = null;
+    // Timer interval completely removed
   }
   
   initialize();
+  
+  // Optional: Add subtle visual effect when fragments align (non-intrusive, maintains design integrity)
+  // This adds a faint glow when aligned without disrupting the original aesthetic
+  // No timer, no text, no dots - just an ambient visual cue that respects the dark theme
+  let lastAlignmentState = false;
+  
+  function updateAlignmentGlow() {
+    const isAligned = checkAlignment();
+    const stageElement = document.getElementById('stage');
+    
+    if (isAligned && !lastAlignmentState) {
+      // Add temporary subtle border glow when aligned - purely visual, no text or timer
+      stageElement.style.transition = 'box-shadow 0.3s ease';
+      stageElement.style.boxShadow = '0 0 45px rgba(255, 68, 0, 0.6), inset 0 0 35px rgba(255, 68, 0, 0.4)';
+      setTimeout(() => {
+        if (checkAlignment()) {
+          // Keep subtle glow while maintaining alignment
+          stageElement.style.boxShadow = '0 0 35px rgba(255, 68, 0, 0.4), inset 0 0 25px rgba(255, 68, 0, 0.3)';
+        }
+      }, 200);
+    } else if (!isAligned) {
+      stageElement.style.boxShadow = '0 0 40px rgba(255, 68, 0, 0.3), inset 0 0 30px rgba(255, 68, 0, 0.2)';
+      stageElement.style.transition = 'box-shadow 0.2s ease';
+    }
+    
+    lastAlignmentState = isAligned;
+  }
+  
+  // Override checkAlignment to also trigger visual glow but maintain no text/timer elements
+  const originalCheckAlignment = checkAlignment;
+  window.checkAlignment = function() {
+    const result = originalCheckAlignment();
+    updateAlignmentGlow();
+    return result;
+  };
+  
+  // Replace the checkAlignment reference in drag handlers to use updated version
+  // Re-bind to ensure alignment glow works without affecting removed elements
+  const enhancedCheckAlignment = function() {
+    const posA = getPosition(layerA);
+    const posB = getPosition(layerB);
+    const currentDX = posB.left - posA.left;
+    const currentDY = posB.top - posA.top;
+    const dxDiff = Math.abs(currentDX - TARGET_DX);
+    const dyDiff = Math.abs(currentDY - TARGET_DY);
+    const exactMatch = (dxDiff <= PRECISION && dyDiff <= PRECISION);
+    
+    // Update glow effect without any text/timer elements
+    const stageElement = document.getElementById('stage');
+    if (exactMatch && !lastAlignmentState) {
+      stageElement.style.transition = 'box-shadow 0.3s ease';
+      stageElement.style.boxShadow = '0 0 45px rgba(255, 68, 0, 0.6), inset 0 0 35px rgba(255, 68, 0, 0.4)';
+      setTimeout(() => {
+        const newPosA = getPosition(layerA);
+        const newPosB = getPosition(layerB);
+        const newDX = newPosB.left - newPosA.left;
+        const newDY = newPosB.top - newPosA.top;
+        const newDxDiff = Math.abs(newDX - TARGET_DX);
+        const newDyDiff = Math.abs(newDY - TARGET_DY);
+        if (newDxDiff <= PRECISION && newDyDiff <= PRECISION) {
+          stageElement.style.boxShadow = '0 0 35px rgba(255, 68, 0, 0.4), inset 0 0 25px rgba(255, 68, 0, 0.3)';
+        }
+      }, 200);
+    } else if (!exactMatch) {
+      stageElement.style.boxShadow = '0 0 40px rgba(255, 68, 0, 0.3), inset 0 0 30px rgba(255, 68, 0, 0.2)';
+      stageElement.style.transition = 'box-shadow 0.2s ease';
+    }
+    lastAlignmentState = exactMatch;
+    return exactMatch;
+  };
+  
+  // Replace the alignment check function used in drag events
+  window.alignmentCheck = enhancedCheckAlignment;
+  
+  // Override the original onDragMove and onDragEnd to use enhanced alignment
+  const originalOnDragMove = onDragMove;
+  const enhancedOnDragMove = function(e) {
+    if (!dragActive) return;
+    const point = e.touches ? e.touches[0] : e;
+    const dx = point.clientX - dragActive.startX;
+    const dy = point.clientY - dragActive.startY;
+    const newLeft = dragActive.origLeft + dx;
+    const newTop = dragActive.origTop + dy;
+    setLayerPos(dragActive.el, newLeft, newTop);
+    enhancedCheckAlignment();
+  };
+  
+  const enhancedOnDragEnd = function() {
+    if (!dragActive) return;
+    dragActive = null;
+    layerA.style.zIndex = '4';
+    layerB.style.zIndex = '3';
+    enhancedCheckAlignment();
+  };
+  
+  // Remove old listeners and add enhanced ones
+  document.removeEventListener('mousemove', onDragMove);
+  document.removeEventListener('touchmove', onDragMove);
+  document.removeEventListener('mouseup', onDragEnd);
+  document.removeEventListener('touchend', onDragEnd);
+  
+  document.addEventListener('mousemove', enhancedOnDragMove);
+  document.addEventListener('touchmove', enhancedOnDragMove, { passive: false });
+  document.addEventListener('mouseup', enhancedOnDragEnd);
+  document.addEventListener('touchend', enhancedOnDragEnd);
+  
+  // Update reset function to use enhanced check
+  const originalFullReset = fullReset;
+  window.fullReset = function() {
+    setLayerPos(layerA, START_A.left, START_A.top);
+    setLayerPos(layerB, START_B.left, START_B.top);
+    layerA.style.zIndex = '4';
+    layerB.style.zIndex = '3';
+    dragActive = null;
+    enhancedCheckAlignment();
+  };
+  
+  document.getElementById('resetButton').addEventListener('click', () => window.fullReset());
+  
+  // Initialize with alignment check
+  enhancedCheckAlignment();
 </script>
 </body>
 </html>
